@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const Offer = (productId) => {
+const Offer = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const { productId } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,7 +14,7 @@ const Offer = (productId) => {
           "https://lereacteur-vinted-api.herokuapp.com/offers"
         );
         // console.log(response.data);
-        console.log(response.data);
+        console.log(response.data.offers);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -22,12 +24,43 @@ const Offer = (productId) => {
     fetchData();
   }, []);
 
-  const exist = data.offers.find((elem) => elem._id === productId);
-  console.log(exist);
+  console.log("my product id ", productId);
 
-  console.log("my product id ", productId, data);
+  const myItem = data.offers.find((el) => el._id === productId);
 
-  return isLoading ? <span>is Loading</span> : <div>ok</div>;
+  return isLoading ? (
+    <span>is Loading</span>
+  ) : (
+    <div>
+      {myItem.product_pictures.map((picture, i) => {
+        return <img key={i} src={picture.url} alt="" />;
+      })}
+      <div>
+        <div>
+          <div>{myItem.product_price}</div>
+          <div>
+            {myItem.product_details.map((detail, i) => {
+              return (
+                <div key={i}>
+                  <div>{detail.MARQUE}</div>
+                  <div>{detail.TAILLE}</div>
+                  <div>{detail.ETAT}</div>
+                  <div>{detail.COULEUR}</div>
+                  <div>{detail.EPLACEMENT}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <button>Acheter</button>
+      </div>
+    </div>
+  );
 };
 
 export default Offer;

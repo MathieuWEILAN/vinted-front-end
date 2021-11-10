@@ -35,7 +35,7 @@ const Home = () => {
           {data.offers.map((item, i) => {
             return (
               item.product_pictures.length > 0 && (
-                <Link to={`/offer/${item._id}`} productId={item._id}>
+                <Link to={`/offer/${item._id}`}>
                   <div key={item._id} className="item">
                     {item.product_pictures.length > 1 ? (
                       <img src={item.product_pictures[0].url} alt="" />
