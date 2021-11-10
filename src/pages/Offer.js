@@ -34,38 +34,135 @@ const Offer = () => {
         <label>●</label>
       </div>
     </div>
-  ) : (
-    <div>
+  ) : data.product_pictures.length < 2 ? (
+    <div className="offer-page red">
       {data.product_pictures.map((picture, i) => {
-        return <img key={i} src={picture.url} alt="" />;
+        return (
+          <img key={i} src={picture.url} alt="" className="offer-picture" />
+        );
       })}
-      <div>
+      <div className="offer-infos">
         <div>
-          <div>{data.product_price}</div>
+          <div className="offer-price">{data.product_price}€</div>
           <div>
             {data.product_details.map((detail, i) => {
               return (
                 <div key={i}>
-                  <div>{detail.MARQUE}</div>
-                  <div>{detail.TAILLE}</div>
-                  <div>{detail.ETAT}</div>
-                  <div>{detail.COULEUR}</div>
-                  <div>{detail.EPLACEMENT}</div>
+                  {detail.MARQUE ? (
+                    <div className="infos-details">
+                      <span className="grey">MARQUE</span>{" "}
+                      <span>{detail.MARQUE}</span>
+                    </div>
+                  ) : (
+                    <span></span>
+                  )}
+                  {detail.COULEUR && (
+                    <div className="infos-details">
+                      <span className="grey">COULEUR</span>{" "}
+                      <span>{detail.COULEUR}</span>
+                    </div>
+                  )}
+                  {detail.TAILLE && (
+                    <div className="infos-details">
+                      <span className="grey">TAILLE</span>{" "}
+                      <span>{detail.TAILLE}</span>
+                    </div>
+                  )}
+                  {detail.ETAT && (
+                    <div className="infos-details">
+                      <span className="grey">ETAT</span>{" "}
+                      <span>{detail.ETAT}</span>
+                    </div>
+                  )}
+                  {detail.EMPLACEMENT && (
+                    <div className="infos-details">
+                      <span className="grey">EMPLACEMENT</span>{" "}
+                      <span>{detail.EMPLACEMENT}</span>
+                    </div>
+                  )}
                 </div>
               );
             })}
           </div>
         </div>
-        <div>
-          {" "}
+        <div className="offer-infos-2">
           <div>{data.product_name}</div>
           <div>{data.product_description}</div>
           <div>
             {/* <img src="" alt="" /> */}
-            <div>{data.owner.account.username}</div>
+            <div className="username">{data.owner.account.username}</div>
           </div>
         </div>
-        <button>Acheter</button>
+        <button className="btn-right">Acheter</button>
+      </div>
+    </div>
+  ) : (
+    <div className="container-offer">
+      <div className="offer-page-1">
+        {data.product_pictures.map((picture, i) => {
+          return (
+            <img
+              key={i}
+              src={picture.url}
+              alt=""
+              className="offer-multiple-picture"
+            />
+          );
+        })}
+        <div className="offer-infos">
+          <div>
+            <div className="offer-price">{data.product_price}€</div>
+            <div>
+              {data.product_details.map((detail, i) => {
+                return (
+                  <div key={i}>
+                    {detail.MARQUE ? (
+                      <div className="infos-details">
+                        <span className="grey">MARQUE</span>{" "}
+                        <span>{detail.MARQUE}</span>
+                      </div>
+                    ) : (
+                      <span></span>
+                    )}
+                    {detail.COULEUR && (
+                      <div className="infos-details">
+                        <span className="grey">COULEUR</span>{" "}
+                        <span>{detail.COULEUR}</span>
+                      </div>
+                    )}
+                    {detail.TAILLE && (
+                      <div className="infos-details">
+                        <span className="grey">TAILLE</span>{" "}
+                        <span>{detail.TAILLE}</span>
+                      </div>
+                    )}
+                    {detail.ETAT && (
+                      <div className="infos-details">
+                        <span className="grey">ETAT</span>{" "}
+                        <span>{detail.ETAT}</span>
+                      </div>
+                    )}
+                    {detail.EMPLACEMENT && (
+                      <div className="infos-details">
+                        <span className="grey">EMPLACEMENT</span>{" "}
+                        <span>{detail.EMPLACEMENT}</span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="offer-infos-2">
+            <div>{data.product_name}</div>
+            <div>{data.product_description}</div>
+            <div>
+              {/* <img src="" alt="" /> */}
+              <div className="username">{data.owner.account.username}</div>
+            </div>
+          </div>
+          <button className="btn-right">Acheter</button>
+        </div>
       </div>
     </div>
   );

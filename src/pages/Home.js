@@ -42,7 +42,7 @@ const Home = () => {
           <div>
             <div className="banner-ready">
               Prêt à faire du tri dans vos placards ?
-              <button className="btn-right">Commencez à vendre</button>
+              <button className="btn-right bann">Commencez à vendre</button>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@ const Home = () => {
           {data.offers.map((item, i) => {
             return (
               item.product_pictures.length > 0 && (
-                <Link to={`/offer/${item._id}`}>
+                <Link to={`/offer/${item._id}`} className="link">
                   <div key={item._id} className="item">
                     {item.product_pictures.length > 1 ? (
                       <img
@@ -72,10 +72,10 @@ const Home = () => {
                         })}
                       </div>
                     )}
+                    <div className="price">{item.product_price}€</div>
+                    <div className="details">{item.product_name}</div>
 
-                    <div>{item.product_name}</div>
-                    <div>{item.product_price}</div>
-                    <div>
+                    <div className="details">
                       {item.product_details.map((details, i) => {
                         return <div>{details.TAILLE}</div>;
                       })}

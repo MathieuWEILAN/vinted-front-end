@@ -3,6 +3,8 @@ body {
   margin: 0;
   padding: 0;
   background: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .cs-loader {
@@ -176,6 +178,9 @@ button:hover {
   border-radius: 10px;
 }
 
+.bann {
+  margin-top: 40px;
+}
 .banner-pic {
   position: absolute;
   bottom: 0;
@@ -185,33 +190,127 @@ button:hover {
 }
 
 .products {
-  /* background-color: aqua; */
+  width: 1280px;
   display: flex;
-  display: flex;
-  overflow: hidden;
-  overflow-x: scroll;
-  margin: 50px;
-}
-
-.product::-webkit-scrollbar {
-  display: none;
-}
-.product {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  flex-wrap: wrap;
+  margin: 30px 70px;
+  /* background-color: aquamarine; */
 }
 
 .item {
   /* border: blue 5px solid; */
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  margin: 10px;
-  justify-content: center;
+  background-color: rgb(248, 248, 248);
+  padding: 10px;
+  cursor: pointer;
+  margin: 20px;
+  box-sizing: border-box;
 }
 
 .img-item {
   width: 250px;
   height: 350px;
   object-fit: cover;
+}
+
+.price {
+  font-size: 18px;
+  color: black;
+}
+.details {
+  font-size: 13px;
+  color: rgb(163, 157, 157);
+}
+
+.link {
+  text-decoration: none;
+}
+
+.offer-page {
+  width: 100%;
+  margin: 0px auto;
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+  grid-gap: 30px;
+  gap: 30px;
+  background-color: rgb(240, 240, 240);
+}
+
+/* IF MORE THAN 1 PICTURE OFFER */
+.container-offer {
+  width: 100%;
+  margin: auto;
+  background-color: rgb(240, 240, 240);
+}
+
+.offer-page-1 {
+  margin: 30px auto;
+  display: flex;
+  justify-content: space-around;
+  grid-gap: 30px;
+  gap: 30px;
+  background-color: rgb(240, 240, 240);
+  display: flex;
+  overflow: hidden;
+  overflow-x: scroll;
+  width: 90%;
+}
+
+.offer-page-1 > img:hover {
+  width: 800px;
+  cursor: pointer;
+}
+
+.offer-picture {
+  height: 600px;
+  object-fit: cover;
+}
+
+li {
+  list-style: none;
+}
+.offer-multiple-picture {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  overflow: hidden;
+  overflow-x: scroll;
+  margin-top: 40px;
+  object-fit: cover;
+}
+
+.offer-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  width: 320px;
+  padding: 40px;
+}
+
+.offer-price {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.offer-infos-2 {
+  border-top: 1px grey dashed;
+  padding-top: 20px;
+  font-size: 20px;
+}
+
+.infos-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  padding-top: 5px;
+}
+.grey {
+  color: rgb(141, 140, 140);
+}
+
+.username {
+  margin-top: 10px;
+  font-size: 22px;
+  font-weight: bold;
 }
