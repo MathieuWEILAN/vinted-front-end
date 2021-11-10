@@ -1,1 +1,25 @@
 /* Other rules */
+img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.banner {
+  width: 100%;
+}
+
+.products {
+  background-color: aqua;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  border: blue 5px solid;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  margin: 5px;
+  justify-content: center;
+}
