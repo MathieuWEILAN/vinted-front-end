@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import banner from "../img/banner-vinted.jpg";
+import wide from "../img/banner_wide.jpg";
 
 const Home = () => {
   const [data, setData] = useState();
@@ -39,6 +40,11 @@ const Home = () => {
     <div>
       <div>
         <div className="banner">
+          <img
+            src="https://www.vinted.fr/assets/hero-block/tear-d431548c90905ad757632e4c3075d9473e38c7c6642721efeae9413afb9387a2.svg"
+            alt=""
+            className="banner-wide"
+          />
           <div>
             <div className="banner-ready">
               Prêt à faire du tri dans vos placards ?

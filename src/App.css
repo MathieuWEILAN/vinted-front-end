@@ -178,6 +178,14 @@ button:hover {
   border-radius: 10px;
 }
 
+.banner-wide {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+}
+
 .bann {
   margin-top: 40px;
 }
