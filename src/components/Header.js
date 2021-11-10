@@ -1,11 +1,29 @@
+import logo from "../img/Vinted_logo.png";
+import { useState } from "react";
+
 const Header = () => {
+  const [search, setSearch] = useState("");
+  const handleSearch = (event) => {
+    let value = event.target.value;
+    setSearch(value);
+  };
   return (
-    <div>
-      <div>logo</div>
+    <div className="header">
+      <img src={logo} alt="" className="logo" />
       <div>
-        <button>s'incrire</button>
-        <button>se connecter</button>
-        <button>vend tes articless</button>
+        <input
+          type="text"
+          name="searchbar"
+          id="searchbar"
+          placeholder="Recherches des articles"
+          onChange={handleSearch}
+          className="searchBar"
+        />
+      </div>
+      <div className="header-btn">
+        <button className="btn-left">s'incrire</button>
+        <button className="btn-left">se connecter</button>
+        <button className="btn-right">vend tes articles</button>
       </div>
     </div>
   );

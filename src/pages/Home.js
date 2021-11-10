@@ -25,12 +25,28 @@ const Home = () => {
   }, []);
 
   return isLoading ? (
-    <span>En Chargement</span>
+    <div class="cs-loader">
+      <div class="cs-loader-inner">
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+      </div>
+    </div>
   ) : (
     <div>
       <div>
-        <div>home</div>
-        <img src={banner} alt="" className="banner" />
+        <div className="banner">
+          <div>
+            <div className="banner-ready">
+              Prêt à faire du tri dans vos placards ?
+              <button className="btn-right">Commencez à vendre</button>
+            </div>
+          </div>
+        </div>
+
         <div className="products">
           {data.offers.map((item, i) => {
             return (
@@ -38,12 +54,20 @@ const Home = () => {
                 <Link to={`/offer/${item._id}`}>
                   <div key={item._id} className="item">
                     {item.product_pictures.length > 1 ? (
-                      <img src={item.product_pictures[0].url} alt="" />
+                      <img
+                        src={item.product_pictures[0].url}
+                        alt=""
+                        className="img-item"
+                      />
                     ) : (
                       <div>
                         {item.product_pictures.map((picture, i) => {
                           return (
-                            <img src={item.product_pictures[0].url} alt="" />
+                            <img
+                              src={item.product_pictures[0].url}
+                              alt=""
+                              className="img-item"
+                            />
                           );
                         })}
                       </div>

@@ -11,10 +11,9 @@ const Offer = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://lereacteur-vinted-api.herokuapp.com/offers"
+          `https://lereacteur-vinted-api.herokuapp.com/offer/${productId}`
         );
-        // console.log(response.data);
-        console.log(response.data.offers);
+        console.log("data ", response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -24,22 +23,27 @@ const Offer = () => {
     fetchData();
   }, []);
 
-  console.log("my product id ", productId);
-
-  const myItem = data.offers.find((el) => el._id === productId);
-
   return isLoading ? (
-    <span>is Loading</span>
+    <div class="cs-loader">
+      <div class="cs-loader-inner">
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+      </div>
+    </div>
   ) : (
     <div>
-      {myItem.product_pictures.map((picture, i) => {
+      {data.product_pictures.map((picture, i) => {
         return <img key={i} src={picture.url} alt="" />;
       })}
       <div>
         <div>
-          <div>{myItem.product_price}</div>
+          <div>{data.product_price}</div>
           <div>
-            {myItem.product_details.map((detail, i) => {
+            {data.product_details.map((detail, i) => {
               return (
                 <div key={i}>
                   <div>{detail.MARQUE}</div>
@@ -53,9 +57,13 @@ const Offer = () => {
           </div>
         </div>
         <div>
-          <div></div>
-          <div></div>
-          <div></div>
+          {" "}
+          <div>{data.product_name}</div>
+          <div>{data.product_description}</div>
+          <div>
+            {/* <img src="" alt="" /> */}
+            <div>{data.owner.account.username}</div>
+          </div>
         </div>
         <button>Acheter</button>
       </div>

@@ -1,25 +1,217 @@
 /* Other rules */
-img {
-  width: 200px;
-  height: 300px;
-  object-fit: cover;
+body {
+  margin: 0;
+  padding: 0;
+  background: white;
 }
 
-.banner {
+.cs-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
   width: 100%;
 }
 
-.products {
-  background-color: aqua;
+.cs-loader-inner {
+  transform: translateY(-50%);
+  top: 50%;
+  position: absolute;
+  width: calc(100% - 200px);
+  color: #15b1ba;
+  padding: 0 100px;
+  text-align: center;
+}
+
+.cs-loader-inner label {
+  font-size: 20px;
+  opacity: 0;
+  display: inline-block;
+}
+
+@keyframes lol {
+  0% {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+  33% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  66% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+}
+
+@-webkit-keyframes lol {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-300px);
+  }
+  33% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+  }
+  66% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(300px);
+  }
+}
+
+.cs-loader-inner label:nth-child(6) {
+  -webkit-animation: lol 3s infinite ease-in-out;
+  animation: lol 3s infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(5) {
+  -webkit-animation: lol 3s 100ms infinite ease-in-out;
+  animation: lol 3s 100ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(4) {
+  -webkit-animation: lol 3s 200ms infinite ease-in-out;
+  animation: lol 3s 200ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(3) {
+  -webkit-animation: lol 3s 300ms infinite ease-in-out;
+  animation: lol 3s 300ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(2) {
+  -webkit-animation: lol 3s 400ms infinite ease-in-out;
+  animation: lol 3s 400ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(1) {
+  -webkit-animation: lol 3s 500ms infinite ease-in-out;
+  animation: lol 3s 500ms infinite ease-in-out;
+}
+/*  */
+
+.header {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px;
+}
+
+.logo {
+  width: 200px;
+}
+
+.searchBar {
+  height: 30px;
+  width: 500px;
+  display: flex;
+  justify-content: left;
+  padding-left: 20px;
+  background-color: rgb(236, 233, 233);
+  border: none;
+  border-radius: 20px;
+}
+
+.btn-left {
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: #15b1ba 3px solid;
+  color: #15b1ba;
+  background-color: white;
+  font-size: 14px;
+}
+
+.btn-right {
+  margin-left: 30px;
+  padding: 5px 10px;
+  border: #15b1ba 3px solid;
+  border-radius: 20px;
+  background-color: #15b1ba;
+  font-size: 13px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 14px;
+}
+button:hover {
+  cursor: pointer;
+}
+
+/* img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+} */
+
+.banner {
+  background-image: url("./img/banner-vinted.jpg");
+  height: 455px;
+  width: 100%;
+  position: relative;
+  background-position: 50%;
+  background-size: cover;
+}
+
+.banner-ready {
+  height: 220px;
+  width: 360px;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 3px;
+  font-size: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 75px;
+  margin-left: 40px;
+  border-radius: 10px;
+}
+
+.banner-pic {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+}
+
+.products {
+  /* background-color: aqua; */
+  display: flex;
+  display: flex;
+  overflow: hidden;
+  overflow-x: scroll;
+  margin: 50px;
+}
+
+.product::-webkit-scrollbar {
+  display: none;
+}
+.product {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .item {
-  border: blue 5px solid;
+  /* border: blue 5px solid; */
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
-  margin: 5px;
+  flex-shrink: 0;
+  margin: 10px;
   justify-content: center;
+}
+
+.img-item {
+  width: 250px;
+  height: 350px;
+  object-fit: cover;
 }
