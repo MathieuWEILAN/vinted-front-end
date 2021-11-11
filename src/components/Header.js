@@ -1,15 +1,19 @@
 import logo from "../img/Vinted_logo.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import Cookies, { set } from "js-cookie";
 
 const Header = () => {
   const [search, setSearch] = useState("");
-  const [isToken, setIsToken] = useState(Cookies.get("token") || "");
+  const [isToken, setIsToken] = useState(Cookies.get("token"));
 
   const handleSearch = (event) => {
     let value = event.target.value;
     setSearch(value);
+  };
+
+  const deconnected = () => {
+    setIsToken(Cookies.remove("token"));
   };
 
   const navigate = useNavigate();
@@ -29,7 +33,7 @@ const Header = () => {
       </div>
       <div className="header-btn">
         {isToken ? (
-          <button>Se déconnecter</button>
+          <button onClick={deconnected}>Se déconnecter</button>
         ) : (
           <div>
             <button
