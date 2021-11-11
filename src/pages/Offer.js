@@ -46,38 +46,13 @@ const Offer = () => {
           <div className="offer-price">{data.product_price}€</div>
           <div>
             {data.product_details.map((detail, i) => {
+              const keys = Object.keys(detail);
               return (
                 <div key={i}>
-                  {detail.MARQUE ? (
+                  {[keys[0]] && (
                     <div className="infos-details">
-                      <span className="grey">MARQUE</span>{" "}
-                      <span>{detail.MARQUE}</span>
-                    </div>
-                  ) : (
-                    <span></span>
-                  )}
-                  {detail.COULEUR && (
-                    <div className="infos-details">
-                      <span className="grey">COULEUR</span>{" "}
-                      <span>{detail.COULEUR}</span>
-                    </div>
-                  )}
-                  {detail.TAILLE && (
-                    <div className="infos-details">
-                      <span className="grey">TAILLE</span>{" "}
-                      <span>{detail.TAILLE}</span>
-                    </div>
-                  )}
-                  {detail.ETAT && (
-                    <div className="infos-details">
-                      <span className="grey">ETAT</span>{" "}
-                      <span>{detail.ETAT}</span>
-                    </div>
-                  )}
-                  {detail.EMPLACEMENT && (
-                    <div className="infos-details">
-                      <span className="grey">EMPLACEMENT</span>{" "}
-                      <span>{detail.EMPLACEMENT}</span>
+                      <span className="grey">{keys[0]}</span>{" "}
+                      <span>{detail[keys[0]]}</span>
                     </div>
                   )}
                 </div>
@@ -114,38 +89,13 @@ const Offer = () => {
             <div className="offer-price">{data.product_price}€</div>
             <div>
               {data.product_details.map((detail, i) => {
+                const keys = Object.keys(detail);
                 return (
                   <div key={i}>
-                    {detail.MARQUE ? (
+                    {[keys[0]] && (
                       <div className="infos-details">
-                        <span className="grey">MARQUE</span>{" "}
-                        <span>{detail.MARQUE}</span>
-                      </div>
-                    ) : (
-                      <span></span>
-                    )}
-                    {detail.COULEUR && (
-                      <div className="infos-details">
-                        <span className="grey">COULEUR</span>{" "}
-                        <span>{detail.COULEUR}</span>
-                      </div>
-                    )}
-                    {detail.TAILLE && (
-                      <div className="infos-details">
-                        <span className="grey">TAILLE</span>{" "}
-                        <span>{detail.TAILLE}</span>
-                      </div>
-                    )}
-                    {detail.ETAT && (
-                      <div className="infos-details">
-                        <span className="grey">ETAT</span>{" "}
-                        <span>{detail.ETAT}</span>
-                      </div>
-                    )}
-                    {detail.EMPLACEMENT && (
-                      <div className="infos-details">
-                        <span className="grey">EMPLACEMENT</span>{" "}
-                        <span>{detail.EMPLACEMENT}</span>
+                        <span className="grey">{keys[0]}</span>{" "}
+                        <span>{detail[keys[0]]}</span>
                       </div>
                     )}
                   </div>

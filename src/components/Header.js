@@ -1,5 +1,6 @@
 import logo from "../img/Vinted_logo.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [search, setSearch] = useState("");
@@ -7,6 +8,9 @@ const Header = () => {
     let value = event.target.value;
     setSearch(value);
   };
+
+  const navigate = useNavigate();
+
   return (
     <div className="header">
       <img src={logo} alt="" className="logo" />
@@ -21,7 +25,14 @@ const Header = () => {
         />
       </div>
       <div className="header-btn">
-        <button className="btn-left">s'incrire</button>
+        <button
+          onClick={() => {
+            navigate("/signup");
+          }}
+          className="btn-left"
+        >
+          s'incrire
+        </button>
         <button className="btn-left">se connecter</button>
         <button className="btn-right">vend tes articles</button>
       </div>
