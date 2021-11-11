@@ -3,9 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies, { set } from "js-cookie";
 
-const Header = () => {
+const Header = ({ token, setToken }) => {
   const [search, setSearch] = useState("");
-  const [isToken, setIsToken] = useState(Cookies.get("token"));
 
   const handleSearch = (event) => {
     let value = event.target.value;
@@ -13,7 +12,8 @@ const Header = () => {
   };
 
   const deconnected = () => {
-    setIsToken(Cookies.remove("token"));
+    Cookies.remove("token");
+    setToken("");
   };
 
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const Header = () => {
         />
       </div>
       <div className="header-btn">
-        {isToken ? (
+        {token ? (
           <button onClick={deconnected}>Se déconnecter</button>
         ) : (
           <div>

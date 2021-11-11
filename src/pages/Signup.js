@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = ({ token, setToken }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +24,8 @@ const Signup = () => {
     setPassword(value);
   };
 
+  const navigate = useNavigate();
+
   const sendDataUser = async (event) => {
     event.preventDefault();
     if (!username || !email || !password) {
@@ -38,6 +41,8 @@ const Signup = () => {
       console.log(response.data);
       const token = response.data.token;
       Cookies.set("token", token, { expires: 14 });
+      setToken(token);
+      navigate("/");
     }
   };
 
