@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const Signup = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,23 +23,27 @@ const Signup = () => {
     setPassword(value);
   };
 
-  const sendDataUser = (event) => {
+  const sendDataUser = async (event) => {
     event.preventDefault();
     if (!username || !email || !password) {
       return alert("Missing infomation");
     } else {
       const newUser = { username: username, email: email, password: password };
-      setUser(newUser);
-      console.log(newUser);
-      const request = axios
-        .post(
-          "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-          newUser
-        )
-        .then((response) => setUser(response.data.id));
-      console.log(request);
+      //   console.log(newUser);
+      const response = await axios.post(
+        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+        newUser
+      );
+      setUser(response.data);
+      console.log(response.data);
+      const token = response.data.token;
+      Cookies.set("token", token, { expires: 14 });
     }
   };
+
+  //ligne 32 à 37 peut s'écrire comme ca aussi : axios.post( "https://lereacteur-vinted-api.herokuapp.com/user/signup",newUser).then(response=> setUser({response.data}))
+  // dans la data on retrouvera les infos envoyés ainsi que le token(qui a été créé), l'id, etc...
+  //.then() c'est pareil que async/await, ca attend que chaque étape de la fonction se termine avant d'enregistrer la data dans le state
 
   return (
     <div className="form-signup">

@@ -1,9 +1,12 @@
 import logo from "../img/Vinted_logo.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const [search, setSearch] = useState("");
+  const [isToken, setIsToken] = useState(Cookies.get("token") || "");
+
   const handleSearch = (event) => {
     let value = event.target.value;
     setSearch(value);
@@ -25,15 +28,29 @@ const Header = () => {
         />
       </div>
       <div className="header-btn">
-        <button
-          onClick={() => {
-            navigate("/signup");
-          }}
-          className="btn-left"
-        >
-          s'incrire
-        </button>
-        <button className="btn-left">se connecter</button>
+        {isToken ? (
+          <button>Se déconnecter</button>
+        ) : (
+          <div>
+            <button
+              onClick={() => {
+                navigate("/signup");
+              }}
+              className="btn-left"
+            >
+              s'incrire
+            </button>
+            <button
+              onClick={() => {
+                navigate("/login");
+              }}
+              className="btn-left"
+            >
+              se connecter
+            </button>
+          </div>
+        )}
+
         <button className="btn-right">vend tes articles</button>
       </div>
     </div>
