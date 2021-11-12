@@ -110,6 +110,9 @@ body {
 .logo {
   width: 200px;
 }
+.logo:hover {
+  cursor: pointer;
+}
 
 .searchBar {
   height: 30px;
@@ -129,6 +132,16 @@ body {
   border: #15b1ba 3px solid;
   color: #15b1ba;
   background-color: white;
+  font-size: 14px;
+}
+
+.btn-sale {
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: #15b1ba 3px solid;
+  color: white;
+  background-color: #15b1ba;
   font-size: 14px;
 }
 
@@ -341,4 +354,65 @@ a {
   text-decoration: none;
   color: inherit;
   font-weight: bold;
+}
+
+/* .form-signup {
+  width: 30%;
+  margin: 50px auto 100px;
+  display: flex;
+  flex-direction: column;
+} */
+.input-sub {
+  margin: 15px;
+  padding: 5px;
+  border: none;
+  /* border-bottom: 1px solid rgb(233, 146, 146); */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(238, 238, 238);
+  padding: 10px;
+  width: 30%;
+  margin: 30px auto;
+}
+
+h2 {
+  margin: 10px;
+  text-align: center;
+}
+
+.sub {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-sub {
+  width: 40%;
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 20px;
+  background-color: #15b1ba;
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+.btn-sub:hover {
+  cursor: pointer;
+}
+
+p {
+  font-size: 13px;
+  color: grey;
+  text-align: justify;
+}
+.baseline {
+  font-size: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.header-btn {
+  display: flex;
 }

@@ -20,7 +20,14 @@ const Header = ({ token, setToken }) => {
 
   return (
     <div className="header">
-      <img src={logo} alt="" className="logo" />
+      <img
+        onClick={() => {
+          navigate("/");
+        }}
+        src={logo}
+        alt=""
+        className="logo"
+      />
       <div>
         <input
           type="text"
@@ -55,7 +62,7 @@ const Header = ({ token, setToken }) => {
           </div>
         )}
 
-        <button className="btn-right">vend tes articles</button>
+        <button className="btn-sale">vend tes articles</button>
       </div>
     </div>
   );

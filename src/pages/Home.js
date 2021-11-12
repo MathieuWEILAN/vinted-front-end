@@ -12,9 +12,9 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://lereacteur-vinted-api.herokuapp.com/offers"
+          "https://my-first-backend-project.herokuapp.com/offers"
         );
-        // console.log(response.data);
+        console.log(response.data);
 
         setData(response.data);
         setIsLoading(false);
@@ -56,39 +56,19 @@ const Home = () => {
         <div className="products">
           {data.offers.map((item, i) => {
             return (
-              item.product_pictures.length > 0 && (
-                <Link to={`/offer/${item._id}`} className="link">
-                  <div key={item._id} className="item">
-                    {item.product_pictures.length > 1 ? (
-                      <img
-                        src={item.product_pictures[0].url}
-                        alt=""
-                        className="img-item"
-                      />
-                    ) : (
-                      <div>
-                        {item.product_pictures.map((picture, i) => {
-                          return (
-                            <img
-                              src={item.product_pictures[0].url}
-                              alt=""
-                              className="img-item"
-                            />
-                          );
-                        })}
-                      </div>
-                    )}
-                    <div className="price">{item.product_price}€</div>
-                    <div className="details">{item.product_name}</div>
+              <Link to={`/offer/${item._id}`} className="link">
+                <div key={item._id} className="item">
+                  <img src={item.product_image} alt="" className="img-item" />
+                  <div className="price">{item.product_price}€</div>
+                  <div className="details">{item.product_name}</div>
 
-                    <div className="details">
-                      {item.product_details.map((details, i) => {
-                        return <div>{details.TAILLE}</div>;
-                      })}
-                    </div>
+                  <div className="details">
+                    {item.product_details.map((details, i) => {
+                      return <div>{details.TAILLE}</div>;
+                    })}
                   </div>
-                </Link>
-              )
+                </div>
+              </Link>
             );
           })}
         </div>

@@ -39,16 +39,24 @@ const Login = ({ setToken, token }) => {
 
   return (
     <div>
-      <h2>Se connecter</h2>
       <form action="" onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" onChange={handleEmail} />
+        <h2>Se connecter</h2>
+
+        <input
+          type="email"
+          placeholder="Email"
+          onChange={handleEmail}
+          className="input-sub"
+        />
         <input
           type="password"
           placeholder="Mot de passe"
           onClick={handlePassword}
+          className="input-sub"
         />
-        <input type="submit" name="" id="" />
+        <input type="submit" name="" id="" className="btn-sub" />
         <div
+          className="baseline"
           onClick={() => {
             navigate("/signup");
           }}
