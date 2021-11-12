@@ -2,15 +2,21 @@ import logo from "../img/Vinted_logo.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies, { set } from "js-cookie";
+import Toggle from "./Toggle";
 
-const Header = ({ token, setToken }) => {
-  const [search, setSearch] = useState("");
-
-  const handleSearch = (event) => {
-    let value = event.target.value;
-    setSearch(value);
-  };
-
+const Header = ({
+  token,
+  setToken,
+  handleSearch,
+  handleToggle,
+  toggle,
+  handlePriceMin,
+  handlePriceMax,
+  priceMin,
+  priceMax,
+  priceSort,
+  handleSort,
+}) => {
   const deconnected = () => {
     Cookies.remove("token");
     setToken("");
@@ -34,13 +40,20 @@ const Header = ({ token, setToken }) => {
           name="searchbar"
           id="searchbar"
           placeholder="Recherches des articles"
-          onChange={handleSearch}
           className="searchBar"
+          onChange={handleSearch}
         />
+        <div>
+          <Toggle handleSort={handleSort} />
+        </div>
+        <input type="number" value={priceMin} onChange={handlePriceMin} />
+        <input type="number" value={priceMax} onChange={handlePriceMax} />
       </div>
       <div className="header-btn">
         {token ? (
-          <button onClick={deconnected}>Se déconnecter</button>
+          <button onClick={deconnected} className="disconnect">
+            Se déconnecter
+          </button>
         ) : (
           <div>
             <button

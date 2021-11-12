@@ -12,11 +12,62 @@ import { useState } from "react";
 function App() {
   const [token, setToken] = useState(Cookies.get("token"));
 
+  const [search, setSearch] = useState("");
+  const [priceMin, setPriceMin] = useState();
+  const [priceMax, setPriceMax] = useState();
+  // const [priceSort, setPriceSort] = useState(false);
+  const [priceSort, setPriceSort] = useState("sort=price-desc");
+
+  const handleSearch = (event) => {
+    let value = event.target.value;
+    setSearch(value);
+  };
+
+  const handlePriceMin = (event) => {
+    let value = Number(event.target.value);
+    setPriceMin(value);
+  };
+
+  const handlePriceMax = (event) => {
+    let value = Number(event.target.value);
+    setPriceMax(value);
+  };
+
+  const handleSort = () => {
+    if (priceSort === "sort=price-desc") {
+      setPriceSort("sort=price-asc");
+    }
+    if (priceSort === "sort=price-asc") {
+      setPriceSort("sort=price-desc");
+    }
+  };
+
   return (
     <Router>
-      <Header token={token} setToken={setToken} />
+      <Header
+        token={token}
+        setToken={setToken}
+        search={search}
+        handleSearch={handleSearch}
+        priceMin={priceMin}
+        handlePriceMin={handlePriceMin}
+        priceMax={priceMax}
+        handlePriceMax={handlePriceMax}
+        priceSort={priceSort}
+        handleSort={handleSort}
+      />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              search={search}
+              priceMin={priceMin}
+              priceMax={priceMax}
+              priceSort={priceSort}
+            />
+          }
+        />
         <Route path="/offer/:productId" element={<Offer />} />
         <Route
           path="/signup"

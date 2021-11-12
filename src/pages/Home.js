@@ -4,18 +4,34 @@ import axios from "axios";
 import banner from "../img/banner-vinted.jpg";
 import wide from "../img/banner_wide.jpg";
 
-const Home = () => {
+const Home = ({
+  handleSearch,
+  search,
+
+  priceMin,
+  priceMax,
+  priceSort,
+}) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://my-first-backend-project.herokuapp.com/offers"
-        );
-        console.log(response.data);
+        // let response = await axios.get(
+        //   `https://my-first-backend-project.herokuapp.com/offers`
+        // );
+        const title = search ? `title=${search}` : "";
+        const priceMinimum = priceMin ? `priceMin=${priceMin}` : "";
+        // const priceMaximum = priceMax ? `priceMax=${priceMax}` : "";
+        const priceRange = !priceSort ? "sort=price-desc" : "sort=price-asc";
 
+        const response = await axios.get(
+          `https://my-first-backend-project.herokuapp.com/offers?${title}&${priceMinimum}&${priceSort}`
+        );
+
+        console.log(title);
+        console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -23,7 +39,7 @@ const Home = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [search, priceMin, priceSort]);
 
   return isLoading ? (
     <div class="cs-loader">
@@ -64,7 +80,7 @@ const Home = () => {
 
                   <div className="details">
                     {item.product_details.map((details, i) => {
-                      return <div>{details.TAILLE}</div>;
+                      return <div>{details.size}</div>;
                     })}
                   </div>
                 </div>
