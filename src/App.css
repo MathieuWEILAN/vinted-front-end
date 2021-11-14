@@ -105,9 +105,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px;
+  margin: 10px Opx;
   width: 100%;
   box-sizing: border-box;
+  padding: 15px;
 }
 
 .logo {
@@ -226,8 +227,9 @@ button:hover {
 .products {
   width: 100%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  margin: 30px 70px;
+  margin: 30px auto;
   /* background-color: aquamarine; */
 }
 
@@ -432,6 +434,7 @@ p {
   width: 100%;
   margin: 20px auto;
   /* background-color: palegreen; */
+  box-sizing: border-box;
 }
 /* MEDIA QUERIES */
 
