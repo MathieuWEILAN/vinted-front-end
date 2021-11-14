@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Offer from "./pages/Offer";
 import Header from "./components/Header";
@@ -11,34 +11,25 @@ import { useState } from "react";
 
 function App() {
   const [token, setToken] = useState(Cookies.get("token"));
-
   const [search, setSearch] = useState("");
-  const [priceMin, setPriceMin] = useState();
-  const [priceMax, setPriceMax] = useState();
-  // const [priceSort, setPriceSort] = useState(false);
-  const [priceSort, setPriceSort] = useState("sort=price-desc");
+  const [checked, setChecked] = useState("sort=price-asc");
+  const [prices, setPrices] = useState([0, 13000]);
+
+  const handleChangePrices = (event, newValue) => {
+    setPrices(newValue);
+  };
 
   const handleSearch = (event) => {
     let value = event.target.value;
     setSearch(value);
   };
 
-  const handlePriceMin = (event) => {
-    let value = Number(event.target.value);
-    setPriceMin(value);
-  };
-
-  const handlePriceMax = (event) => {
-    let value = Number(event.target.value);
-    setPriceMax(value);
-  };
-
-  const handleSort = () => {
-    if (priceSort === "sort=price-desc") {
-      setPriceSort("sort=price-asc");
+  const handleChange = () => {
+    if (checked === "sort=price-asc") {
+      setChecked("sort=price-desc");
     }
-    if (priceSort === "sort=price-asc") {
-      setPriceSort("sort=price-desc");
+    if (checked === "sort=price-desc") {
+      setChecked("sort=price-asc");
     }
   };
 
@@ -49,12 +40,9 @@ function App() {
         setToken={setToken}
         search={search}
         handleSearch={handleSearch}
-        priceMin={priceMin}
-        handlePriceMin={handlePriceMin}
-        priceMax={priceMax}
-        handlePriceMax={handlePriceMax}
-        priceSort={priceSort}
-        handleSort={handleSort}
+        handleChange={handleChange}
+        prices={prices}
+        handleChangePrices={handleChangePrices}
       />
       <Routes>
         <Route
@@ -62,9 +50,9 @@ function App() {
           element={
             <Home
               search={search}
-              priceMin={priceMin}
-              priceMax={priceMax}
-              priceSort={priceSort}
+              handleChange={handleChange}
+              checked={checked}
+              prices={prices}
             />
           }
         />

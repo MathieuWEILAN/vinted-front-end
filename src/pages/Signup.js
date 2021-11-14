@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +59,7 @@ const Signup = ({ token, setToken }) => {
   //.then() c'est pareil que async/await, ca attend que chaque étape de la fonction se termine avant d'enregistrer la data dans le state
 
   return (
-    <div className="form-signup">
+    <div>
       <form action="" onSubmit={sendDataUser}>
         <h2>S'incrire</h2>
         <input

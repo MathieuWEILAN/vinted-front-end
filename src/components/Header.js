@@ -2,20 +2,18 @@ import logo from "../img/Vinted_logo.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies, { set } from "js-cookie";
-import Toggle from "./Toggle";
+import * as React from "react";
+import Switch from "@mui/material/Switch";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
 
 const Header = ({
   token,
   setToken,
   handleSearch,
-  handleToggle,
-  toggle,
-  handlePriceMin,
-  handlePriceMax,
-  priceMin,
-  priceMax,
-  priceSort,
-  handleSort,
+  handleChange,
+  prices,
+  handleChangePrices,
 }) => {
   const deconnected = () => {
     Cookies.remove("token");
@@ -34,7 +32,7 @@ const Header = ({
         alt=""
         className="logo"
       />
-      <div>
+      <div className="filters">
         <input
           type="text"
           name="searchbar"
@@ -43,11 +41,28 @@ const Header = ({
           className="searchBar"
           onChange={handleSearch}
         />
-        <div>
-          <Toggle handleSort={handleSort} />
+        <div className="component-hdr">
+          <div>
+            <span>prix ⇡</span>
+            <Switch
+              onChange={handleChange}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            <span>prix ⇣</span>
+          </div>
+          <div className="slider">
+            <span className="slider-span">Prix (€)entre</span>
+            <Box sx={{ width: 400 }}>
+              <Slider
+                value={prices}
+                onChange={handleChangePrices}
+                valueLabelDisplay="auto"
+                min={0}
+                max={13000}
+              />
+            </Box>
+          </div>
         </div>
-        <input type="number" value={priceMin} onChange={handlePriceMin} />
-        <input type="number" value={priceMax} onChange={handlePriceMax} />
       </div>
       <div className="header-btn">
         {token ? (

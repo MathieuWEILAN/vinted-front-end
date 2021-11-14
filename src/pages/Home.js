@@ -4,16 +4,11 @@ import axios from "axios";
 import banner from "../img/banner-vinted.jpg";
 import wide from "../img/banner_wide.jpg";
 
-const Home = ({
-  handleSearch,
-  search,
-
-  priceMin,
-  priceMax,
-  priceSort,
-}) => {
+const Home = ({ search, checked, prices }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [limit, setLimit] = useState(5);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,15 +17,13 @@ const Home = ({
         //   `https://my-first-backend-project.herokuapp.com/offers`
         // );
         const title = search ? `title=${search}` : "";
-        const priceMinimum = priceMin ? `priceMin=${priceMin}` : "";
-        // const priceMaximum = priceMax ? `priceMax=${priceMax}` : "";
-        const priceRange = !priceSort ? "sort=price-desc" : "sort=price-asc";
+        const priceMinimum = `priceMin=${prices[0]}`;
+        const priceMaximum = `priceMax=${prices[1]}`;
+        const pageOffer = `page=${page}`;
 
         const response = await axios.get(
-          `https://my-first-backend-project.herokuapp.com/offers?${title}&${priceMinimum}&${priceSort}`
+          `https://my-first-backend-project.herokuapp.com/offers?${title}&${priceMinimum}&${priceMaximum}&${checked}&${pageOffer}`
         );
-
-        console.log(title);
         console.log(response.data);
         setData(response.data);
         setIsLoading(false);
@@ -39,7 +32,19 @@ const Home = ({
       }
     };
     fetchData();
-  }, [search, priceMin, priceSort]);
+  }, [search, checked, prices, page]);
+
+  const handlePageAdd = () => {
+    if (data.offers.length > 1) {
+      return setPage(page + 1);
+    }
+  };
+
+  const handlePageBack = () => {
+    if (page > 1) {
+      return setPage(page - 1);
+    }
+  };
 
   return isLoading ? (
     <div class="cs-loader">
@@ -68,25 +73,39 @@ const Home = ({
             </div>
           </div>
         </div>
-
-        <div className="products">
-          {data.offers.map((item, i) => {
-            return (
-              <Link to={`/offer/${item._id}`} className="link">
-                <div key={item._id} className="item">
-                  <img src={item.product_image} alt="" className="img-item" />
-                  <div className="price">{item.product_price}€</div>
-                  <div className="details">{item.product_name}</div>
-
-                  <div className="details">
-                    {item.product_details.map((details, i) => {
-                      return <div>{details.size}</div>;
-                    })}
+        <div className="container-home">
+          <div className="products">
+            {data.offers.map((item, i) => {
+              return (
+                <Link to={`/offer/${item._id}`} className="link">
+                  <div key={item._id} className="item">
+                    <img src={item.product_image} alt="" className="img-item" />
+                    <div className="price">{item.product_price}€</div>
+                    <div className="details">{item.product_name}</div>
+                    <div className="details">
+                      {item.product_details.map((details, i) => {
+                        return <div>{details.size}</div>;
+                      })}
+                    </div>
                   </div>
-                </div>
-              </Link>
-            );
-          })}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        <div>
+          <div className="pagination">
+            <button className="page-btn" onClick={handlePageBack}>
+              &laquo;
+            </button>
+            <div>{page}</div>
+            {data.offers.length > 1 && (
+              <button className="page-btn" onClick={handlePageAdd}>
+                &raquo;
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
