@@ -279,9 +279,9 @@ button:hover {
 }
 
 .offer-picture {
-  /* height: 600px; */
+  height: 600px;
   width: 50%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .offer-picture:hover {
