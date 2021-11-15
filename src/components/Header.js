@@ -22,6 +22,14 @@ const Header = ({
 
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    if (token) {
+      navigate("/publish");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div className="header">
       <img
@@ -89,12 +97,7 @@ const Header = ({
             </button>{" "}
           </div>
         )}
-        <button
-          className="btn-sale"
-          onClick={() => {
-            navigate("/publish");
-          }}
-        >
+        <button className="btn-sale" onClick={handleClick}>
           vend tes articles
         </button>
       </div>

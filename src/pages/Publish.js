@@ -1,4 +1,7 @@
-import { avatarGroupClasses } from "@mui/material";
+import {
+  avatarGroupClasses,
+  getFormHelperTextUtilityClasses,
+} from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 
@@ -17,10 +20,10 @@ const Publish = ({ token }) => {
   //   Faire requête axios vers le serveur pour enregistrer la publication
   const handleSubmit = async (event) => {
     try {
-      event.prevenDefault();
+      event.preventDefault();
       //   joindre à la requête les infos + photos + bearer token (si pas de bearer token, renvoyer à la page signup ou login)
 
-      if (!file && !title && !price) {
+      if (!file || !title || !price) {
         return alert("missing information");
       } else {
         const formData = new FormData();
@@ -41,8 +44,7 @@ const Publish = ({ token }) => {
           formData,
           {
             headers: {
-              authorization: `Bearer ${token}`,
-              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -54,22 +56,36 @@ const Publish = ({ token }) => {
     }
   };
 
+  const handleFile = (event) => {
+    let value = event.target.files;
+    setFile(URL.createObjectURL(value[0]));
+  };
+
   return (
     <div>
       <section>
         <h1>Vends ton article</h1>
-        <form action="" onSubmit={handleSubmit}>
-          <div>
-            <div>
+        <form action="" onSubmit={handleSubmit} className="form-post">
+          <div className="first-block">
+            <div className="second-block-pic">
+              <label htmlFor="file">AJOUTEZ UNE PHOTO</label>
               <input
+                id="file"
                 type="file"
                 placeholder="+ Ajouter une photo"
-                onChange={(event) => setFile(event.target.files[0])}
+                onChange={handleFile}
+                className="add-pic"
+                multiple={true}
               />
+              {file && (
+                <div>
+                  <img src={file} alt="" />
+                </div>
+              )}
             </div>
           </div>
-          <div>
-            <div>
+          <div className="first-block">
+            <div className="second-block">
               <h4>Titre</h4>
               <input
                 type="text"
@@ -77,24 +93,26 @@ const Publish = ({ token }) => {
                 onChange={(event) => {
                   setTitle(event.target.value);
                 }}
+                className="input-post"
               />
             </div>
-            <div>
+            <div className="second-block">
               <h4>Decris ton article</h4>
               <textarea
                 name="description"
                 id=""
-                rows="5"
-                cols="30"
+                rows="200"
+                cols="100"
                 placeholder="ex : porté quelque fois, taille correctement"
                 onChange={(event) => {
                   setDescription(event.target.value);
                 }}
+                className="input-post"
               ></textarea>
             </div>
           </div>
-          <div>
-            <div>
+          <div className="first-block">
+            <div className="second-block">
               <h4>Marque</h4>
               <input
                 type="text"
@@ -102,9 +120,10 @@ const Publish = ({ token }) => {
                 onChange={(event) => {
                   setBrand(event.target.value);
                 }}
+                className="input-post"
               />
             </div>
-            <div>
+            <div className="second-block">
               <h4>Taille</h4>
               <input
                 type="text"
@@ -112,9 +131,10 @@ const Publish = ({ token }) => {
                 onChange={(event) => {
                   setSize(event.target.value);
                 }}
+                className="input-post"
               />
             </div>
-            <div>
+            <div className="second-block">
               <h4>Couleur</h4>
               <input
                 type="text"
@@ -122,9 +142,10 @@ const Publish = ({ token }) => {
                 onChange={(event) => {
                   setColor(event.target.value);
                 }}
+                className="input-post"
               />
             </div>
-            <div>
+            <div className="second-block">
               <h4>Etat</h4>
               <input
                 type="text"
@@ -132,9 +153,10 @@ const Publish = ({ token }) => {
                 onChange={(event) => {
                   setCondition(event.target.value);
                 }}
+                className="input-post"
               />
             </div>
-            <div>
+            <div className="second-block">
               <h4>Lieu</h4>
               <input
                 type="text"
@@ -142,11 +164,12 @@ const Publish = ({ token }) => {
                 onChange={(event) => {
                   setCity(event.target.value);
                 }}
+                className="input-post"
               />
             </div>
           </div>
-          <div>
-            <div>
+          <div className="first-block">
+            <div className="second-block">
               <h4>Prix</h4>
               <div>
                 <input
@@ -155,16 +178,17 @@ const Publish = ({ token }) => {
                   onChange={(event) => {
                     setPrice(event.target.value);
                   }}
+                  className="input-post"
                 />
-                <div>
+                <div className="input-checkbox">
                   <input type="checkbox" />
                   <span>Je suis intéressé par les échanges</span>
                 </div>
               </div>
             </div>
           </div>
-          <div>
-            <input type="submit" value="Ajouter" />
+          <div className="input-div">
+            <input type="submit" value="Ajouter" className="input-add" />
           </div>
         </form>
       </section>

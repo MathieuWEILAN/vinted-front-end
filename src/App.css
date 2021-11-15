@@ -436,7 +436,112 @@ p {
   /* background-color: palegreen; */
   box-sizing: border-box;
 }
-/* MEDIA QUERIES */
+
+/* PUBLISH */
+
+h1 {
+  text-align: center;
+  padding-top: 40px;
+}
+
+section {
+  background-color: rgb(238, 234, 234);
+}
+
+.form-post {
+  width: 80%;
+  background-color: rgb(238, 234, 234);
+  margin: none;
+  padding: 1px;
+}
+.first-block {
+  /* border: 1px grey solid; */
+  margin: 15px 0;
+  background-color: violet;
+}
+
+.second-block {
+  background-color: white;
+  border-bottom: 1px solid rgb(226, 221, 221);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+  align-items: center;
+}
+h4 {
+  font-weight: normal;
+}
+
+.add-pic {
+  background-color: red;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.second-block-pic {
+  background-color: white;
+  border-bottom: 1px solid rgb(226, 221, 221);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  align-items: center;
+}
+
+.second-block-pic:hover {
+  cursor: pointer;
+}
+
+label {
+  border: 2px solid #15b1ba;
+  padding: 20px;
+  color: #15b1ba;
+  font-weight: bold;
+}
+label:hover {
+  cursor: pointer;
+}
+
+.input-post {
+  width: 50%;
+  padding: 3px;
+  border: none;
+  border-bottom: dashed 1px rgb(211, 207, 207);
+  margin: none;
+  height: 20px;
+}
+
+.input-div {
+  display: flex;
+  justify-content: end;
+}
+.input-add {
+  padding: 20px 40px;
+  background-color: #15b1ba;
+  color: white;
+  border: none;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.input-add:hover {
+  cursor: pointer;
+}
+
+.third-block {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.input-checkbox {
+  padding-top: 20px;
+}
+
+/* ---------------MEDIA QUERIES------------------- */
 
 @media (max-width: 1064px) {
   .header {
@@ -483,7 +588,8 @@ p {
   }
 }
 
-@media (max-width: 342px) {
+/*------------------------- TELEPHONE */
+@media (max-width: 348px) {
   .header {
     display: flex;
   }
@@ -503,5 +609,68 @@ p {
     height: 180px;
     justify-content: center;
     align-items: center;
+  }
+
+  .form-post {
+    /* background-color: blueviolet; */
+    padding: 10px;
+    margin: 0px auto;
+  }
+
+  .first-block {
+    width: 100%;
+    background-color: white;
+    margin: 4px auto;
+    border: 1px solid grey;
+  }
+  .second-block {
+    border: 1px dashed rgb(211, 207, 207);
+    padding: 10px;
+    margin: 15px;
+  }
+
+  .input-post {
+    width: 95%;
+    border: none;
+    border-bottom: rgb(211, 207, 207);
+    padding-top: 5px;
+  }
+  h1 {
+    margin: 10px auto;
+    text-align: center;
+  }
+  h4 {
+    text-align: left;
+  }
+
+  .input-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  span {
+    font-size: 10px;
+  }
+  .input-div {
+    width: 100%;
+  }
+  .input-add {
+    color: white;
+    background-color: #15b1ba;
+    border: none;
+    padding: 10px;
+    margin: 10px auto;
+    width: 100%;
+  }
+  .footer {
+    font-size: 10px;
+    height: 50px;
+  }
+
+  .header-btn {
+    margin: 5px auto 0px;
+    padding: 1px;
   }
 }

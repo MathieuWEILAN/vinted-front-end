@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import banner from "../img/banner-vinted.jpg";
 import wide from "../img/banner_wide.jpg";
+import Cookies from "js-cookie";
 
 const Home = ({ search, checked, prices }) => {
   const [data, setData] = useState();
@@ -33,6 +34,8 @@ const Home = ({ search, checked, prices }) => {
     fetchData();
   }, [search, checked, prices, page]);
 
+  const navigate = useNavigate();
+
   const handlePageAdd = () => {
     if (data.offers.length > 1) {
       return setPage(page + 1);
@@ -42,6 +45,14 @@ const Home = ({ search, checked, prices }) => {
   const handlePageBack = () => {
     if (page > 1) {
       return setPage(page - 1);
+    }
+  };
+
+  const handleClick = () => {
+    if (Cookies.get("token")) {
+      navigate("/publish");
+    } else {
+      navigate("/login");
     }
   };
 
@@ -68,7 +79,9 @@ const Home = ({ search, checked, prices }) => {
           <div>
             <div className="banner-ready">
               Prêt à faire du tri dans vos placards ?
-              <button className="btn-right bann">Commencez à vendre</button>
+              <button className="btn-right bann" onClick={handleClick}>
+                Commencez à vendre
+              </button>
             </div>
           </div>
         </div>
