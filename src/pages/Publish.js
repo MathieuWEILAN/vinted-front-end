@@ -4,11 +4,13 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import DropZoneComponent from "../components/DropZoneComponent";
+import Dropzone from "../components/DropZoneComponent";
 
 const Publish = ({ token }) => {
   const [data, setData] = useState();
   const [title, setTitle] = useState("");
-  const [file, setFile] = useState({});
+  const [file, setFile] = useState();
   const [description, setDescription] = useState("");
   const [brand, setBrand] = useState("");
   const [size, setSize] = useState("");
@@ -56,9 +58,15 @@ const Publish = ({ token }) => {
     }
   };
 
-  const handleFile = (event) => {
-    let value = event.target.files;
-    setFile(URL.createObjectURL(value[0]));
+  // const handleFile = (event) => {
+  //   let value = event.target.files;
+  //   console.log(value);
+  //   setFile(value);
+  // };
+
+  const onClick = (event) => {
+    let value = "";
+    setFile(value);
   };
 
   return (
@@ -68,18 +76,19 @@ const Publish = ({ token }) => {
         <form action="" onSubmit={handleSubmit} className="form-post">
           <div className="first-block">
             <div className="second-block-pic">
-              <label htmlFor="file">AJOUTEZ UNE PHOTO</label>
-              <input
-                id="file"
-                type="file"
-                placeholder="+ Ajouter une photo"
-                onChange={handleFile}
-                className="add-pic"
-                multiple={true}
-              />
+              <DropZoneComponent setFile={setFile} />
+
               {file && (
-                <div>
-                  <img src={file} alt="" />
+                <div className="container-preview">
+                  <div>{file[0].name}</div>
+                  <img
+                    src={URL.createObjectURL(file[0])}
+                    alt=""
+                    className="preview"
+                  />
+                  <div onClick={onClick} className="x-remove">
+                    X
+                  </div>
                 </div>
               )}
             </div>
