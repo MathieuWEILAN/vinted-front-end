@@ -360,7 +360,7 @@ form {
   flex-direction: column;
   background-color: rgb(238, 238, 238);
   padding: 10px;
-  width: 30%;
+  width: 400px;
   margin: 30px auto;
 }
 
@@ -480,5 +480,28 @@ p {
 @media (max-width: 560px) {
   .header {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 342px) {
+  .header {
+    display: flex;
+  }
+
+  .logo {
+    width: 100px;
+  }
+  .banner {
+    width: 100%;
+    /* background-position: 20%; */
+  }
+
+  .banner-ready {
+    padding: none;
+    width: 40%;
+    font-size: 20px;
+    height: 180px;
+    justify-content: center;
+    align-items: center;
   }
 }

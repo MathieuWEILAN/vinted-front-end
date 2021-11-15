@@ -7,7 +7,6 @@ import wide from "../img/banner_wide.jpg";
 const Home = ({ search, checked, prices }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
 
   useEffect(() => {

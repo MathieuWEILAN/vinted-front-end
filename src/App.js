@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import Cookies from "js-cookie";
 import Login from "./pages/Login";
 import { useState } from "react";
+import Publish from "./pages/Publish";
 
 function App() {
   const [token, setToken] = useState(Cookies.get("token"));
@@ -64,6 +65,10 @@ function App() {
         <Route
           path="/login"
           element={<Login token={token} setToken={setToken} />}
+        />
+        <Route
+          path="/publish"
+          element={<Publish token={token} setToken={setToken} />}
         />
       </Routes>
       <Footer />
