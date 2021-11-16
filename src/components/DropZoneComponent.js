@@ -3,8 +3,9 @@ import Dropzone, { useDropzone } from "react-dropzone";
 
 const DropZoneComponent = ({ setFile }) => {
   const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
-    setFile(acceptedFiles[0]);
+    console.log("accepted files", acceptedFiles);
+
+    setFile(acceptedFiles);
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });

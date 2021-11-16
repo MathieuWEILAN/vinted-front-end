@@ -14,7 +14,7 @@ const Offer = ({ token }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/offer/${productId}`,
+          `https://my-first-backend-project.herokuapp.com/offer/${productId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         console.log("data ", response.data);

@@ -39,7 +39,7 @@ const Signup = ({ token, setToken }) => {
         };
         //   console.log(newUser);
         const response = await axios.post(
-          "http://localhost:4000/user/signup",
+          "https://my-first-backend-project.herokuapp.com/user/signup",
           newUser
         );
         setUser(response.data);
@@ -59,7 +59,7 @@ const Signup = ({ token, setToken }) => {
   //.then() c'est pareil que async/await, ca attend que chaque étape de la fonction se termine avant d'enregistrer la data dans le state
 
   return (
-    <div>
+    <div className="container-general">
       <form action="" onSubmit={sendDataUser}>
         <h2>S'incrire</h2>
         <input

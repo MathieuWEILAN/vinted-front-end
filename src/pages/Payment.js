@@ -14,34 +14,31 @@ const Payment = () => {
   console.log(idBuyer);
   const shippingFees = 1.0;
   const protectionBuyers = 0.5;
-  const total = price + shippingFees + protectionBuyers;
+  const total = (price + shippingFees + protectionBuyers).toFixed(2);
 
   return (
     <div>
-      <div>
+      <div className="container-payment">
         <div>Résumé de la commande</div>
         <div>
-          <div>
+          <div className="payment">
             <span>Commande</span>
             <span>{price} €</span>
           </div>
-          <div>
+          <div className="payment">
             <span>Frais protection acheteur</span>
-            <span>prix €</span>
+            <span>{protectionBuyers} €</span>
           </div>
-          <div>
+          <div className="payment">
             <span>Frais de port</span>
-            <span>prix €</span>
+            <span>{shippingFees} €</span>
           </div>
         </div>
-        <div>
+        <div className="total-pay">
           <span>Total</span>
           <span>{total} €</span>
         </div>
-        <div>
-          Il ne vous reste plus qu'un étape pour vous offrir {title}. Vous allez
-          payer {total}€ (frais de protection et frais de port inclus).
-        </div>
+
         <Elements stripe={stripePromise}>
           <CheckoutForm total={total} title={title} idBuyer={idBuyer} />
         </Elements>

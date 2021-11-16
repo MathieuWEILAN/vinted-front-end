@@ -7,7 +7,6 @@ import { useState } from "react";
 import DropZoneComponent from "../components/DropZoneComponent";
 import Dropzone from "../components/DropZoneComponent";
 import { Navigate, useNavigate } from "react-router";
-import DropZoneComponent2 from "../components/DropZoneComponent2";
 
 const Publish = ({ token }) => {
   const [data, setData] = useState();
@@ -20,21 +19,21 @@ const Publish = ({ token }) => {
   const [condition, setCondition] = useState("");
   const [city, setCity] = useState("");
   const [price, setPrice] = useState(Number);
-  // const [pictures, setPictures] = useState();
 
   //   Faire requête axios vers le serveur pour enregistrer la publication
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
       //   joindre à la requête les infos + photos + bearer token (si pas de bearer token, renvoyer à la page signup ou login)
-
+      console.log("file is ", file);
       if (!file || !title || !price) {
         return alert("missing information");
       } else {
         const formData = new FormData();
         //   ajouter des paires clés/valeurs à formData
-        formData.append("picture", file);
-        // formData.append("pictures", pictures);
+        for (let i = 0; i < file.length; i++) {
+          formData.append("picture", file[i]);
+        }
         formData.append("title", title);
         formData.append("description", description);
         formData.append("brand", brand);
@@ -43,10 +42,10 @@ const Publish = ({ token }) => {
         formData.append("condition", condition);
         formData.append("city", city);
         formData.append("price", price);
-
+        console.log("formdata ok");
         //   faire la requete
         const response = await axios.post(
-          "http://localhost:4000/offer/publish",
+          "https://my-first-backend-project.herokuapp.com/offer/publish",
           formData,
           {
             headers: {
@@ -75,29 +74,24 @@ const Publish = ({ token }) => {
           <div className="first-block">
             <div className="second-block-pic">
               <DropZoneComponent setFile={setFile} />
-              {file && (
-                <div className="container-preview">
-                  <img
-                    src={URL.createObjectURL(file)}
-                    alt=""
-                    className="preview"
-                  />
-                  <div onClick={onClick} className="x-remove">
-                    X
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* <div>
-              <DropZoneComponent2 setPictures={setPictures} />
               <div>
-                {pictures &&
-                  pictures.map((elem, i) => {
-                    return <img key={i} src={URL.createObjectURL(elem)} />;
+                {file &&
+                  file.map((elem, i) => {
+                    return (
+                      <div className="container-preview">
+                        <img
+                          key={i}
+                          src={URL.createObjectURL(elem)}
+                          className="preview"
+                        />
+                        <div onClick={onClick} className="x-remove">
+                          X
+                        </div>
+                      </div>
+                    );
                   })}
               </div>
-            </div> */}
+            </div>
           </div>
           <div className="first-block">
             <div className="second-block">

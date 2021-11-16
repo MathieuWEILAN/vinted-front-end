@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
+import { useNavigate, navigate } from "react-router";
 
 const CheckoutForm = ({ total, title, idBuyer }) => {
   const stripe = useStripe();
@@ -25,16 +26,20 @@ const CheckoutForm = ({ total, title, idBuyer }) => {
       const stripeToken = stripeResponse.token.id;
       // Requete vers le serveur et envoie du token
       console.log("stripe token", stripeToken);
-      const response = await axios.post("http://localhost:4000/pay", {
-        stripeToken: stripeToken,
-        total: total,
-        title: title,
-        idBuyer: idBuyer,
-      });
+      const response = await axios.post(
+        "https://my-first-backend-project.herokuapp.com/pay",
+        {
+          stripeToken: stripeToken,
+          total: total,
+          title: title,
+          idBuyer: idBuyer,
+        }
+      );
 
-      console.log(response.data);
+      console.log("la reponse du serveur", response.data);
+
       // réponse du serveur, si la transaction à bien eu lieu
-      if (response.data.status === "succeeded") {
+      if (response.data.message === "Paiement validé") {
         setCompleted(true);
       }
     } catch (error) {
@@ -42,17 +47,32 @@ const CheckoutForm = ({ total, title, idBuyer }) => {
     }
   };
 
+  const navigate = useNavigate();
+
   return !completed ? (
     <div>
+      <div>
+        Il ne vous reste plus qu'un étape pour vous offrir {title}. Vous allez
+        payer {total}€ (frais de protection et frais de port inclus).
+      </div>
       <form onSubmit={handleSubmit}>
         <CardElement />
-        <button type="submit">Valider</button>
+        <button className="btn-pay" type="submit">
+          Valider
+        </button>
       </form>
     </div>
   ) : (
-    <div>
-      <div>Paiement accepté</div>
-      <button>retour à l'accueil</button>
+    <div className="accept">
+      <div>Paiement accepté 🥳</div>
+      <button
+        className="back"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        retour à l'accueil
+      </button>
     </div>
   );
 };
