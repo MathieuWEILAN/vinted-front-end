@@ -1,12 +1,21 @@
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../components/CheckoutForm";
+import { useLocation } from "react-router-dom";
 
 const stripePromise = loadStripe(
   "pk_test_51JwRNdHRa7Zdg2IaIYXbFK2Nj4YjIzzrGfl2gasjVWEqERhTbzsPbNdyG4PKiQOKMdgznJKHBvsymSWN37HN3ujw000ypOhEQ3"
 );
 
 const Payment = () => {
+  const location = useLocation();
+
+  const { title, price, idBuyer } = location.state;
+  console.log(idBuyer);
+  const shippingFees = 1.0;
+  const protectionBuyers = 0.5;
+  const total = price + shippingFees + protectionBuyers;
+
   return (
     <div>
       <div>
@@ -14,7 +23,7 @@ const Payment = () => {
         <div>
           <div>
             <span>Commande</span>
-            <span>prix €</span>
+            <span>{price} €</span>
           </div>
           <div>
             <span>Frais protection acheteur</span>
@@ -27,17 +36,16 @@ const Payment = () => {
         </div>
         <div>
           <span>Total</span>
-          <span>prix €</span>
+          <span>{total} €</span>
         </div>
         <div>
-          Il ne vous reste plus qu'un étape pour vous offrir Azuka shirt. Vous
-          allez payer 6.5 € (frais de protection et frais de port inclus).
+          Il ne vous reste plus qu'un étape pour vous offrir {title}. Vous allez
+          payer {total}€ (frais de protection et frais de port inclus).
         </div>
         <Elements stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm total={total} title={title} idBuyer={idBuyer} />
         </Elements>
       </div>
-      <button>Payer</button>
     </div>
   );
 };

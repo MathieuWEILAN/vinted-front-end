@@ -2,20 +2,24 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useNavigate, Navigate } from "react-router";
 
 const Offer = ({ token }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const { productId } = useParams();
+  const [buyer, setBuyer] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/offer/${productId}`
+          `http://localhost:4000/offer/${productId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         console.log("data ", response.data);
-        setData(response.data);
+        setData(response.data.checkId);
+        setBuyer(response.data.checkBuyer);
         setIsLoading(false);
       } catch (error) {
         console.log(error.message);
@@ -24,8 +28,19 @@ const Offer = ({ token }) => {
     fetchData();
   }, []);
 
+  const navigate = useNavigate();
   const onClick = () => {
-    if (Cookies.get(token)) {
+    if (token) {
+      navigate("/payment", {
+        state: {
+          title: data.product_name,
+          price: data.product_price,
+          idBuyer: buyer._id,
+          token: token,
+        },
+      });
+    } else {
+      navigate("/login");
     }
   };
 
@@ -69,7 +84,9 @@ const Offer = ({ token }) => {
             <div className="username">{data.owner.account.username}</div>
           </div>
         </div>
-        <button className="btn-right">Acheter</button>
+        <button onClick={onClick} className="btn-right">
+          Acheter
+        </button>
       </div>
     </div>
   );
