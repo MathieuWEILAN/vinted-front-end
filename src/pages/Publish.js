@@ -20,6 +20,7 @@ const Publish = ({ token }) => {
   const [city, setCity] = useState("");
   const [price, setPrice] = useState(Number);
 
+  const navigate = useNavigate();
   //   Faire requête axios vers le serveur pour enregistrer la publication
   const handleSubmit = async (event) => {
     try {
@@ -55,6 +56,7 @@ const Publish = ({ token }) => {
         );
         setData(response.data);
         console.log(response.data);
+        navigate("/");
       }
     } catch (error) {
       console.log(error.message);
