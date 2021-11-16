@@ -8,6 +8,7 @@ const DropZoneComponent = ({ setFile }) => {
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
   return (
     <div>
       <div {...getRootProps()} className="drag">

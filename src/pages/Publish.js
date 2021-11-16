@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 import DropZoneComponent from "../components/DropZoneComponent";
 import Dropzone from "../components/DropZoneComponent";
+import { Navigate, useNavigate } from "react-router";
 
 const Publish = ({ token }) => {
   const [data, setData] = useState();
@@ -18,6 +19,7 @@ const Publish = ({ token }) => {
   const [condition, setCondition] = useState("");
   const [city, setCity] = useState("");
   const [price, setPrice] = useState(Number);
+  const [pictures, setPictures] = useState();
 
   //   Faire requête axios vers le serveur pour enregistrer la publication
   const handleSubmit = async (event) => {
@@ -31,6 +33,7 @@ const Publish = ({ token }) => {
         const formData = new FormData();
         //   ajouter des paires clés/valeurs à formData
         formData.append("picture", file);
+        formData.append("pictures", pictures);
         formData.append("title", title);
         formData.append("description", description);
         formData.append("brand", brand);
@@ -58,18 +61,17 @@ const Publish = ({ token }) => {
     }
   };
 
-  // const handleFile = (event) => {
-  //   let value = event.target.files;
-  //   console.log(value);
-  //   setFile(value);
-  // };
-
   const onClick = (event) => {
     let value = "";
     setFile(value);
   };
 
-  return (
+  const addPictures = (event) => {
+    let value = event.target.files;
+    setPictures(value);
+  };
+
+  return token ? (
     <div>
       <section>
         <h1>Vends ton article</h1>
@@ -77,10 +79,8 @@ const Publish = ({ token }) => {
           <div className="first-block">
             <div className="second-block-pic">
               <DropZoneComponent setFile={setFile} />
-
               {file && (
                 <div className="container-preview">
-                  <div>{file[0].name}</div>
                   <img
                     src={URL.createObjectURL(file[0])}
                     alt=""
@@ -92,6 +92,17 @@ const Publish = ({ token }) => {
                 </div>
               )}
             </div>
+
+            {/* <div>
+              <input multiple type="file" onChange={addPictures} />
+              {pictures && (
+                <div>
+                  {pictures.map((elem, i) => {
+                    return <div>ok</div>;
+                  })}
+                </div>
+              )}
+            </div> */}
           </div>
           <div className="first-block">
             <div className="second-block">
@@ -202,6 +213,8 @@ const Publish = ({ token }) => {
         </form>
       </section>
     </div>
+  ) : (
+    <Navigate to="/login" />
   );
 };
 
