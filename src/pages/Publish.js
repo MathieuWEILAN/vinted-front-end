@@ -7,6 +7,7 @@ import { useState } from "react";
 import DropZoneComponent from "../components/DropZoneComponent";
 import Dropzone from "../components/DropZoneComponent";
 import { Navigate, useNavigate } from "react-router";
+import DropZoneComponent2 from "../components/DropZoneComponent2";
 
 const Publish = ({ token }) => {
   const [data, setData] = useState();
@@ -19,7 +20,7 @@ const Publish = ({ token }) => {
   const [condition, setCondition] = useState("");
   const [city, setCity] = useState("");
   const [price, setPrice] = useState(Number);
-  const [pictures, setPictures] = useState();
+  // const [pictures, setPictures] = useState();
 
   //   Faire requête axios vers le serveur pour enregistrer la publication
   const handleSubmit = async (event) => {
@@ -33,7 +34,7 @@ const Publish = ({ token }) => {
         const formData = new FormData();
         //   ajouter des paires clés/valeurs à formData
         formData.append("picture", file);
-        formData.append("pictures", pictures);
+        // formData.append("pictures", pictures);
         formData.append("title", title);
         formData.append("description", description);
         formData.append("brand", brand);
@@ -45,7 +46,7 @@ const Publish = ({ token }) => {
 
         //   faire la requete
         const response = await axios.post(
-          "https://my-first-backend-project.herokuapp.com/offer/publish",
+          "http://localhost:4000/offer/publish",
           formData,
           {
             headers: {
@@ -66,11 +67,6 @@ const Publish = ({ token }) => {
     setFile(value);
   };
 
-  const addPictures = (event) => {
-    let value = event.target.files;
-    setPictures(value);
-  };
-
   return token ? (
     <div>
       <section>
@@ -82,7 +78,7 @@ const Publish = ({ token }) => {
               {file && (
                 <div className="container-preview">
                   <img
-                    src={URL.createObjectURL(file[0])}
+                    src={URL.createObjectURL(file)}
                     alt=""
                     className="preview"
                   />
@@ -94,14 +90,13 @@ const Publish = ({ token }) => {
             </div>
 
             {/* <div>
-              <input multiple type="file" onChange={addPictures} />
-              {pictures && (
-                <div>
-                  {pictures.map((elem, i) => {
-                    return <div>ok</div>;
+              <DropZoneComponent2 setPictures={setPictures} />
+              <div>
+                {pictures &&
+                  pictures.map((elem, i) => {
+                    return <img key={i} src={URL.createObjectURL(elem)} />;
                   })}
-                </div>
-              )}
+              </div>
             </div> */}
           </div>
           <div className="first-block">

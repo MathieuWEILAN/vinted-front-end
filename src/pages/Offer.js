@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Cookies from "js-cookie";
 
-const Offer = () => {
+const Offer = ({ token }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const { productId } = useParams();
@@ -11,7 +12,7 @@ const Offer = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://my-first-backend-project.herokuapp.com/offer/${productId}`
+          `http://localhost:4000/offer/${productId}`
         );
         console.log("data ", response.data);
         setData(response.data);
@@ -22,6 +23,11 @@ const Offer = () => {
     };
     fetchData();
   }, []);
+
+  const onClick = () => {
+    if (Cookies.get(token)) {
+    }
+  };
 
   return isLoading ? (
     <div class="cs-loader">

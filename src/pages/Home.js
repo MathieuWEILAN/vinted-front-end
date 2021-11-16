@@ -14,7 +14,7 @@ const Home = ({ search, checked, prices }) => {
     const fetchData = async () => {
       try {
         // let response = await axios.get(
-        //   `https://my-first-backend-project.herokuapp.com/offers`
+        //   `http://localhost:4000/offers`
         // );
         const title = search ? `title=${search}` : "";
         const priceMinimum = `priceMin=${prices[0]}`;
@@ -22,7 +22,7 @@ const Home = ({ search, checked, prices }) => {
         const pageOffer = `page=${page}`;
 
         const response = await axios.get(
-          `https://my-first-backend-project.herokuapp.com/offers?${title}&${priceMinimum}&${priceMaximum}&${checked}&${pageOffer}`
+          `http://localhost:4000/offers?${title}&${priceMinimum}&${priceMaximum}&${checked}&${pageOffer}`
         );
         console.log(response.data);
         setData(response.data);
