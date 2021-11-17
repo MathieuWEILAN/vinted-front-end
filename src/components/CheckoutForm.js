@@ -26,15 +26,12 @@ const CheckoutForm = ({ total, title, idBuyer }) => {
       const stripeToken = stripeResponse.token.id;
       // Requete vers le serveur et envoie du token
       console.log("stripe token", stripeToken);
-      const response = await axios.post(
-        "https://my-first-backend-project.herokuapp.com/pay",
-        {
-          stripeToken: stripeToken,
-          total: total,
-          title: title,
-          idBuyer: idBuyer,
-        }
-      );
+      const response = await axios.post("http://localhost:4000/pay", {
+        stripeToken: stripeToken,
+        total: total,
+        title: title,
+        idBuyer: idBuyer,
+      });
 
       console.log("la reponse du serveur", response.data);
 

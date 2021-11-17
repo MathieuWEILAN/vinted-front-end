@@ -39,7 +39,7 @@ const Signup = ({ token, setToken }) => {
         };
         //   console.log(newUser);
         const response = await axios.post(
-          "https://my-first-backend-project.herokuapp.com/user/signup",
+          "http://localhost:4000/user/signup",
           newUser
         );
         setUser(response.data);

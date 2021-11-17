@@ -284,6 +284,22 @@ button:hover {
   object-fit: contain;
 }
 
+.several-pics {
+  /* background-color: aquamarine; */
+  display: flex;
+  width: 50%;
+  /* border: 4px solid red; */
+  box-sizing: border-box;
+  /* flex: 1; */
+  overflow: scroll;
+}
+.offer-picture-2 {
+  display: flex;
+  height: 600px;
+  width: 100%;
+  object-fit: contain;
+}
+
 .offer-picture:hover {
   cursor: pointer;
 }
