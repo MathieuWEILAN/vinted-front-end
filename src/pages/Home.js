@@ -22,7 +22,7 @@ const Home = ({ search, checked, prices }) => {
         const pageOffer = `page=${page}`;
 
         const response = await axios.get(
-          `http://localhost:4000/offers?${title}&${priceMinimum}&${priceMaximum}&${checked}&${pageOffer}`
+          `https://my-first-backend-project.herokuapp.com/offers?${title}&${priceMinimum}&${priceMaximum}&${checked}&${pageOffer}`
         );
         console.log(response.data);
         setData(response.data);

@@ -25,7 +25,7 @@ const Login = ({ setToken, token }) => {
       event.preventDefault();
       const user = { email: email, password: password };
       const response = await axios.post(
-        "http://localhost:4000/user/login",
+        "https://my-first-backend-project.herokuapp.com/user/login",
         user
       );
       const token = response.data.token;

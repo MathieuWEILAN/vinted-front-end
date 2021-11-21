@@ -46,7 +46,7 @@ const Publish = ({ token }) => {
         console.log("formdata ok");
         //   faire la requete
         const response = await axios.post(
-          "http://localhost:4000/offer/publish",
+          "https://my-first-backend-project.herokuapp.com/offer/publish",
           formData,
           {
             headers: {
